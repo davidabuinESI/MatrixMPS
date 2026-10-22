@@ -14,13 +14,13 @@ typedef struct
 //Precondición: 2 tipo Matrix A y B con valores enteros y rellenas.
 //Postcondición: Devuelve la suma de las matrices A y B en la matriz R.
 // R = A + B
-Matrix op_sumar(const Matrix A, const Matrix B);
+int op_sumar(const int A[][5], const int B[][5], int R[][5]);
 
 
 //Precondición: 2 tipo Matrix A y B con valores enteros y rellenas.
 //Postcondición: Devuelve la suma de las matrices A y B en la matriz R.
 // R = A - B
-Matrix op_restar(const Matrix A, const Matrix B);
+int op_restar(const int A[][5], const int B[][5], int R[][5]);
 
-int op_escalar(int, const int[][5], int[][5])
+int op_escalar(int, const int[][5], int[][5]);
 #endif

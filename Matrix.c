@@ -2,14 +2,14 @@
 #include "OPMATRIX.h"
 #include "IOMATRIX.h"
 #include <limits.h>
-void rellenarMatriz(Matrix M);
-void Show_matrix(Matrix M);
 int main() {
+	int A[N][N], B[N][N], R[N][N];
+	int cod;
+	if (!io_cargar_matrices(A, B)) {
+		return 1;
+	}
 	while(1) {
 		int opt;
-        Matrix A,B,R;
-        rellenarMatriz(A);
-        rellenarMatriz(B);
 		printf("Choose a number from 1 to 5 in order to select operation you want to perform on matrices:\n");
 		printf("[1] Adition\n");	
 		printf("[2] Subtraction\n");	
@@ -22,11 +22,12 @@ int main() {
 
 		switch(opt) {
 			case 1:
-				R=op_sumar(A,B);
-                Show_matrix(R);
+				cod = op_sumar(A,B,R);
+				if (cod == 0) Show_matrix(R); else printf("Error %d: desbordamiento\n", cod);
 				break;
 			case 2:
-				// Subtraction
+				cod = op_restar(A,B,R);
+				if (cod == 0) Show_matrix(R); else printf("Error %d: desbordamiento\n", cod);
 				break;
 			case 3:
 				// Multiplication matrix
@@ -49,16 +50,13 @@ int main() {
 
 int op_restar(const int A[][5], const int B[][5],int R[][5])
 {
-    Matrix R;
     for (size_t i = 0; i < 5; i++)
     {
         for (size_t j = 0; j < 5; j++)
         {
-            R[i][j]=A[i][j]-B[i][j];
-            if ((B[i][j]> 0) && (A[i][j] > INT_MAX - B[i][j])) 
-            {
-                return 10; // Error: Overflow hacia positivo
-            }
+            long long d = (long long)A[i][j] - B[i][j];
+            if (d > INT_MAX || d < INT_MIN) return 10; // Error: Overflow
+            R[i][j] = (int)d;
         }
     }
     return 0;
@@ -67,16 +65,13 @@ int op_restar(const int A[][5], const int B[][5],int R[][5])
 
 int op_sumar(const int A[][5], const int B[][5],int R[][5])
 {
-    Matrix R;
     for (size_t i = 0; i < 5; i++)
     {
         for (size_t j = 0; j < 5; j++)
         {
-            R[i][j]=A[i][j]+B[i][j];
-            if ((B[i][j]> 0) && (A[i][j] > INT_MAX - B[i][j])) 
-            {
-                return 10; // Error: Overflow hacia positivo
-            }
+            long long t = (long long)A[i][j] + B[i][j];
+            if (t > INT_MAX || t < INT_MIN) return 10; // Error: Overflow
+            R[i][j] = (int)t;
         }
     }
     return 0;
@@ -99,22 +94,4 @@ int op_escalar(int k, const int A[][5], int R[][5])
     }
     return 0;
     
-}
-void rellenarMatriz(Matrix M) {
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            M.m[i][j]=i+j;
-        }
-    }
-}
-void Show_matrix(Matrix M)
-{
-    for (int i=0;i<5;i++)
-    {
-        for(int j=0;j<5;i++)
-        {
-            printf("[%d]",&M.m[i][j]);
-        }
-	printf("\n");
-    }
 }
