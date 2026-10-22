@@ -8,8 +8,8 @@ int main() {
 		printf("[1] Adition\n");	
 		printf("[2] Subtraction\n");	
 		printf("[3] Multiplication (betwen matrices)\n");	
-		printf("[4] Multiplication (betwen matrix and scalar)\n");
-		printf("[5] Exit\n");
+		//printf("[4] Multiplication (betwen matrix and scalar)\n");
+		printf("[4] Exit\n");
 	
 		printf("Choose a number: " );	
 		scanf("%d", &opt);
@@ -24,10 +24,10 @@ int main() {
 			case 3:
 				// Multiplication matrix
 				break;
-			case 4:
+			/*case 4:
 				// Multiplication scalar
-				break;
-			case 5:
+				break;*/
+			case 4:
 				// exit
 				return 0;
 		}
