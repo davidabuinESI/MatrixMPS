@@ -1,0 +1,10 @@
+[2026-10-22 13:17:52] INICIO: programa iniciado
+[2026-10-22 13:17:58] ERROR: Faltan datos: carga las matrices necesarias o realiza una operacion antes. (codigo 12)
+[2026-10-22 13:18:09] ERROR: No se puede abrir el fichero. (codigo 1)
+[2026-10-22 13:18:14] ERROR: No se puede abrir el fichero. (codigo 1)
+[2026-10-22 13:18:17] ERROR: Faltan datos: carga las matrices necesarias o realiza una operacion antes. (codigo 12)
+[2026-10-22 13:18:40] CARGA: matriz A desde entrada.txt
+[2026-10-22 13:18:47] CARGA: matriz B desde entrada.txt
+[2026-10-22 13:19:05] OPERACION: suma R = A + B
+[2026-10-22 13:19:25] GUARDADO: matriz R en prueba.txt
+[2026-10-22 13:19:35] FIN: programa finalizado
