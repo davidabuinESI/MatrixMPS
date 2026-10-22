@@ -39,7 +39,13 @@ int main() {
 				// Multiplication matrix
 				break;
 			case 4:
-				// Multiplication scalar
+				int k;
+
+				printf("Write your scalar: ");
+				scanf("%d", &k);
+
+				cod = op_escalar(k,A,R);
+				if (cod == 0) Show_matrix(R); else printf("Error %d: desbordamiento\n", cod);
 				break;
 			case 5:
 				// exit
