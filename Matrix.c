@@ -81,11 +81,12 @@ void rellenarMatriz(Matrix M) {
 }
 void Show_matrix(Matrix M)
 {
-    for (int i;i<5;i++)
+    for (int i;i<N;i++)
     {
-        for(int j;j<5;i++)
+        for(int j;j<N;j++)
         {
             printf("[%d]",M.m[i][j]);
         }
+	printf("\n");
     }
 }
