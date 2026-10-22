@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "OPMATRIX.h"
 #include "IOMATRIX.h"
+#include <limits.h>
 void rellenarMatriz(Matrix M);
 void Show_matrix(Matrix M);
 int main() {
@@ -46,31 +47,39 @@ int main() {
 }
 
 
-Matrix op_restar( const Matrix A, const Matrix B)
+int op_restar(const int A[][5], const int B[][5],int R[][5])
 {
     Matrix R;
     for (size_t i = 0; i < 5; i++)
     {
         for (size_t j = 0; j < 5; j++)
         {
-            R.m[i][j]=A.m[i][j]-B.m[i][j];
+            R[i][j]=A[i][j]-B[i][j];
+            if ((B[i][j]> 0) && (A[i][j] > INT_MAX - B[i][j])) 
+            {
+                return 10; // Error: Overflow hacia positivo
+            }
         }
     }
-    return R;
+    return 0;
 }
 
 
-Matrix op_sumar(const Matrix A, const Matrix B)
+int op_sumar(const int A[][5], const int B[][5],int R[][5])
 {
     Matrix R;
     for (size_t i = 0; i < 5; i++)
     {
         for (size_t j = 0; j < 5; j++)
         {
-            R.m[i][j]=A.m[i][j]+B.m[i][j];
+            R[i][j]=A[i][j]+B[i][j];
+            if ((B[i][j]> 0) && (A[i][j] > INT_MAX - B[i][j])) 
+            {
+                return 10; // Error: Overflow hacia positivo
+            }
         }
     }
-    return R;
+    return 0;
 }
 int op_escalar(int k, const int A[][5], int R[][5])
 {
@@ -78,10 +87,17 @@ int op_escalar(int k, const int A[][5], int R[][5])
     {
         for (size_t j = 0; j < 5; j++)
         {
+            
             R[i][j]=A[i][j]*k;
+            if (k > 0 && A[i][j] > INT_MAX / j) return 10;
+            if (k < 0 && k < INT_MIN / k) return 10;
+            else
+            if (k > 0 && A[i][j] < INT_MIN / k) return 10;
+            if (k < 0 && ( A[i][j]!= 0 && k < INT_MAX / A[i][j])) return 10;
         }
         
     }
+    return 0;
     
 }
 void rellenarMatriz(Matrix M) {
