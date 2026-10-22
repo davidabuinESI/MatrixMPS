@@ -22,7 +22,8 @@ int main() {
 		
 		switch(opt) {
 			case 1:
-				// Adition
+				R=Addition(A,B);
+                Show_matrix(R);
 				break;
 			case 2:
 				// Subtraction
@@ -71,4 +72,21 @@ Matrix op_sumar(const Matrix A, const Matrix B)
         }
     }
     return R;
+}
+void rellenarMatriz(Matrix M) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            M.m[i][j]=i+j;
+        }
+    }
+}
+void Show_matrix(Matrix M)
+{
+    for (int i;i<5;i++)
+    {
+        for(int j;j<5;i++)
+        {
+            printf("[%d]",M.m[i][j]);
+        }
+    }
 }
