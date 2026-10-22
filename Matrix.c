@@ -115,5 +115,6 @@ void Show_matrix(Matrix M)
         {
             printf("[%d]",&M.m[i][j]);
         }
+	printf("\n");
     }
 }
