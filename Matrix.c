@@ -2,6 +2,19 @@
 #include "OPMATRIX.h"
 #include "IOMATRIX.h"
 #include <limits.h>
+
+void mainMenu(int *opt) {
+	printf("Choose a number from 1 to 4 in order to select operation you want to perform on matrices:\n");
+	printf("[1] Adition\n");	
+	printf("[2] Subtraction\n");	
+	printf("[3] Multiplication (betwen matrices)\n");	
+	//printf("[4] Multiplication (betwen matrix and scalar)\n");
+	printf("[4] Exit\n");
+
+	printf("Choose a number: " );	
+	scanf("%d", opt);
+}
+
 int main() {
 	int A[N][N], B[N][N], R[N][N];
 	int cod;
@@ -10,15 +23,8 @@ int main() {
 	}
 	while(1) {
 		int opt;
-		printf("Choose a number from 1 to 5 in order to select operation you want to perform on matrices:\n");
-		printf("[1] Adition\n");	
-		printf("[2] Subtraction\n");	
-		printf("[3] Multiplication (betwen matrices)\n");	
-		//printf("[4] Multiplication (betwen matrix and scalar)\n");
-		printf("[4] Exit\n");
 	
-		printf("Choose a number: " );	
-		scanf("%d", &opt);
+		mainMenu(&opt);	
 
 		switch(opt) {
 			case 1:
