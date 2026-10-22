@@ -36,6 +36,9 @@ int main() {
 			case 4:
 				// exit
 				return 0;
+			default:
+				printf("\nTry again!\n\n");
+				break;
 		}
 	}
 	
