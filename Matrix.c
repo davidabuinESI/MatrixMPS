@@ -109,3 +109,33 @@ int op_escalar(int k, const int A[][N], int R[][N])
     return 0;
     
 }
+int op_multiplicar (const int A[][N], const int B[][N],int R[][N])
+{
+	for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            R[i][j] = 0;
+            
+            for (int k = 0; k < N; k++)
+            {
+                R[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+int es_simetrica (const int A[N][N])
+{
+    for (int i = 0; i < N; i++)
+    {
+        // Solo comprobamos el "triángulo" inferior de la matriz
+        for (int j = 0; j < i; j++)
+        {
+            if (A[i][j] != A[j][i])
+            {
+                return 1; // Al primer fallo, detenemos y descartamos
+            }
+        }
+    }
+    return 0; // Si terminan los bucles sin errores, es simétrica
+}
