@@ -1,14 +1,15 @@
 #ifndef IOMATRIX_H
 #define IOMATRIX_H
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include "OPMATRIX.h"
 
-//Precondición: Recibe una matriz vacía y un fichero de texto
+//Precondición: Recibe una matriz 5x5 vacía y un fichero de texto
 //Postcondición: Rellena la matriz con la matriz correspondiente del fichero de texto
-int io_cargar_matriz(FILE *f, int M[N][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
+int io_cargar_matriz(FILE *f, int M[5][5]) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
             if (fscanf(f, "%d", &M[i][j]) != 1) {
                 return 0;
             }
@@ -19,10 +20,13 @@ int io_cargar_matriz(FILE *f, int M[N][N]) {
 }
 //Precondición: recibe 2 matrices vacías
 //Postcondición: Rellena las dos matrices con las matrices del fichero entrada.txt
-int io_cargar_matrices(int A[N][N], int B[N][N]) {
+int io_cargar_matrices(int A[5][5], int B[5][5]) {
     printf("Introduce el nombre del fichero de entrada terminado en .txt: ");
     char nombre[100];
-    fgets(nombre, sizeof(nombre), stdin);
+    if (fgets(nombre, sizeof(nombre), stdin) == NULL) {
+        return 0;
+    }
+    nombre[strcspn(nombre, "\n")] = '\0';
     FILE *f = fopen(nombre, "r");
 
     if (f == NULL) {
@@ -81,11 +85,11 @@ void io_gestionar_error(int codigo)
     printf("ERROR %d: %s\n", codigo, texto);
 }
 
-void Show_matrix(const int M[N][N])
+void Show_matrix(const int M[5][5])
 {
-    for (int i=0;i<N;i++)
+    for (int i=0;i<5;i++)
     {
-        for(int j=0;j<N;j++)
+        for(int j=0;j<5;j++)
         {
             printf("[%d]", M[i][j]);
         }
@@ -95,11 +99,14 @@ void Show_matrix(const int M[N][N])
 
 
 //Precondición: Recibe una matriz 5x5 llena
-//Psotcondición: Abre el archivo salida.txt y lo rellena con esa matriz
-int guardarMatriz(int M[N][N]) {
+//Postcondición: Abre el archivo salida.txt y lo rellena con esa matriz
+int guardarMatriz(int M[5][5]) {
     printf("Introduce el nombre del fichero de salida terminado en .txt: ");
     char nombre[100];
-    fgets(nombre, sizeof(nombre), stdin);
+    if (fgets(nombre, sizeof(nombre), stdin) == NULL) {
+        return 0;
+    }
+    nombre[strcspn(nombre, "\n")] = '\0'; // Eliminar el salto de línea al final
     FILE *f = fopen(nombre, "w");
 
     if (f == NULL) {
@@ -109,8 +116,8 @@ int guardarMatriz(int M[N][N]) {
 
     fprintf(f, "Matriz resultado:\n");
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
             fprintf(f, "%d ", M[i][j]);
         }
         fprintf(f, "\n");
