@@ -21,4 +21,6 @@ Matrix op_sumar(const Matrix A, const Matrix B);
 //Postcondición: Devuelve la suma de las matrices A y B en la matriz R.
 // R = A - B
 Matrix op_restar(const Matrix A, const Matrix B);
+
+int op_escalar(int, const int[][5], int[][5])
 #endif
