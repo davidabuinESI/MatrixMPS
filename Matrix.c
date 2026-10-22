@@ -37,7 +37,9 @@ int main() {
 	
 	return 0;
 }
-Matrix Substraction(Matrix A,Matrix B)
+
+
+Matrix op_restar( const Matrix A, const Matrix B)
 {
     Matrix R;
     for (size_t i = 0; i < 5; i++)
@@ -49,7 +51,9 @@ Matrix Substraction(Matrix A,Matrix B)
     }
     return R;
 }
-Matrix Addition(Matrix A,Matrix B)
+
+
+Matrix op_sumar(const Matrix A, const Matrix B)
 {
     Matrix R;
     for (size_t i = 0; i < 5; i++)
