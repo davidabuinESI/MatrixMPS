@@ -13,9 +13,10 @@ int main() {
 		printf("Choose a number from 1 to 5 in order to select operation you want to perform on matrices:\n");
 		printf("[1] Adition\n");	
 		printf("[2] Subtraction\n");	
-		printf("[3] Multiplication (betwen matrices)\n");	
+		printf("[3] Multiplication scalar\n");	
 		//printf("[4] Multiplication (betwen matrix and scalar)\n");
-		printf("[4] Exit\n");
+		printf("[4] Multiplication Matrix\n");
+		printf("[5] Exit\n");
 	
 		printf("Choose a number: " );	
 		scanf("%d", &opt);
@@ -48,11 +49,11 @@ int main() {
 }
 
 
-int op_restar(const int A[][5], const int B[][5],int R[][5])
+int op_restar(const int A[][N], const int B[][N],int R[][N])
 {
-    for (size_t i = 0; i < 5; i++)
+    for (size_t i = 0; i < N; i++)
     {
-        for (size_t j = 0; j < 5; j++)
+        for (size_t j = 0; j < N; j++)
         {
             long long d = (long long)A[i][j] - B[i][j];
             if (d > INT_MAX || d < INT_MIN) return 10; // Error: Overflow
@@ -63,11 +64,11 @@ int op_restar(const int A[][5], const int B[][5],int R[][5])
 }
 
 
-int op_sumar(const int A[][5], const int B[][5],int R[][5])
+int op_sumar(const int A[][N], const int B[][N],int R[][N])
 {
-    for (size_t i = 0; i < 5; i++)
+    for (size_t i = 0; i < N; i++)
     {
-        for (size_t j = 0; j < 5; j++)
+        for (size_t j = 0; j < N; j++)
         {
             long long t = (long long)A[i][j] + B[i][j];
             if (t > INT_MAX || t < INT_MIN) return 10; // Error: Overflow
@@ -76,22 +77,53 @@ int op_sumar(const int A[][5], const int B[][5],int R[][5])
     }
     return 0;
 }
-int op_escalar(int k, const int A[][5], int R[][5])
+int op_escalar(int k, const int A[][N], int R[][N])
 {
-    for (size_t i = 0; i < 5; i++)
+    for (size_t i = 0; i < N; i++)
     {
-        for (size_t j = 0; j < 5; j++)
+        for (size_t j = 0; j < N; j++)
         {
+            int a = A[i][j];
             
-            R[i][j]=A[i][j]*k;
-            if (k > 0 && A[i][j] > INT_MAX / j) return 10;
-            if (k < 0 && k < INT_MIN / k) return 10;
-            else
-            if (k > 0 && A[i][j] < INT_MIN / k) return 10;
-            if (k < 0 && ( A[i][j]!= 0 && k < INT_MAX / A[i][j])) return 10;
+            // 1. Comprobar desbordamientos ANTES de multiplicar
+            if (a > 0 && k > 0 && a > INT_MAX / k) return 10; // Overflow positivo
+            if (a > 0 && k < 0 && k < INT_MIN / a) return 10; // Underflow negativo
+            if (a < 0 && k > 0 && a < INT_MIN / k) return 10; // Underflow negativo
+            if (a < 0 && k < 0 && a < INT_MAX / k) return 10; // Overflow positivo (menos por menos)
+
+            // 2. Operar de forma segura
+            R[i][j] = a * k;
         }
-        
     }
     return 0;
-    
+}
+int op_multiplicar (const int A[][N], const int B[][N],int R[][N])
+{
+	for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            R[i][j] = 0;
+            
+            for (int k = 0; k < N; k++)
+            {
+                R[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+int es_simetrica (const int A[N][N])
+{
+    for (int i = 0; i < N; i++)
+    {
+        // Solo comprobamos el "triángulo" inferior de la matriz
+        for (int j = 0; j < i; j++)
+        {
+            if (A[i][j] != A[j][i])
+            {
+                return 1; // Al primer fallo, detenemos y descartamos
+            }
+        }
+    }
+    return 0; // Si terminan los bucles sin errores, es simétrica
 }

@@ -4,13 +4,6 @@
 
 #define N 5 /* orden de las matrices */
 
-
-typedef struct
-{
-    int m[N][N];
-} Matrix;
-
-
 //Precondición: 2 tipo Matrix A y B con valores enteros y rellenas.
 //Postcondición: Devuelve la suma de las matrices A y B en la matriz R.
 // R = A + B
@@ -23,4 +16,6 @@ int op_sumar(const int A[][5], const int B[][5], int R[][5]);
 int op_restar(const int A[][5], const int B[][5], int R[][5]);
 
 int op_escalar(int, const int[][5], int[][5]);
+
+int op_multiplicar (const int A[][5], const int B[][5],int R[][5]);
 #endif
