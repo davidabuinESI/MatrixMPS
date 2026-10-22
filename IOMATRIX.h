@@ -46,8 +46,9 @@ int io_cargar_matrices(int A[5][5], int B[5][5]) {
     return 1;
 }
 
-int io_registrar_log(const char *evento, const char *LOG_RUTA)
+int io_registrar_log(const char *evento)
 {
+    const char *LOG_RUTA = "matrix.log";
     FILE *f;
     time_t t;
 
@@ -55,7 +56,7 @@ int io_registrar_log(const char *evento, const char *LOG_RUTA)
         return 4;
     }
 
-    f = fopen(LOG_RUTA, "a");
+    f = fopen(LOG_RUTA, "a+");
     if (f == NULL) {
         return 4;
     }
