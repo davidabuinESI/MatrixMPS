@@ -2,6 +2,19 @@
 #include "OPMATRIX.h"
 #include "IOMATRIX.h"
 #include <limits.h>
+
+void mainMenu(int *opt) {
+	printf("Choose a number from 1 to 5 in order to select operation you want to perform on matrices:\n");
+	printf("[1] Adition\n");	
+	printf("[2] Subtraction\n");	
+	printf("[3] Multiplication (betwen matrices)\n");	
+	printf("[4] Multiplication (betwen matrix and scalar)\n");
+	printf("[5] Exit\n");
+
+	printf("Choose a number: " );	
+	scanf("%d", opt);
+}
+
 int main() {
 	int A[N][N], B[N][N], R[N][N];
 	int cod;
@@ -10,16 +23,8 @@ int main() {
 	}
 	while(1) {
 		int opt;
-		printf("Choose a number from 1 to 5 in order to select operation you want to perform on matrices:\n");
-		printf("[1] Adition\n");	
-		printf("[2] Subtraction\n");	
-		printf("[3] Multiplication scalar\n");	
-		//printf("[4] Multiplication (betwen matrix and scalar)\n");
-		printf("[4] Multiplication Matrix\n");
-		printf("[5] Exit\n");
 	
-		printf("Choose a number: " );	
-		scanf("%d", &opt);
+		mainMenu(&opt);	
 
 		switch(opt) {
 			case 1:
@@ -33,10 +38,16 @@ int main() {
 			case 3:
 				// Multiplication matrix
 				break;
-			/*case 4:
-				// Multiplication scalar
-				break;*/
 			case 4:
+				int k;
+
+				printf("Write your scalar: ");
+				scanf("%d", &k);
+
+				cod = op_escalar(k,A,R);
+				if (cod == 0) Show_matrix(R); else printf("Error %d: desbordamiento\n", cod);
+				break;
+			case 5:
 				// exit
 				return 0;
 			default:
@@ -96,34 +107,5 @@ int op_escalar(int k, const int A[][N], int R[][N])
         }
     }
     return 0;
-}
-int op_multiplicar (const int A[][N], const int B[][N],int R[][N])
-{
-	for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            R[i][j] = 0;
-            
-            for (int k = 0; k < N; k++)
-            {
-                R[i][j] += A[i][k] * B[k][j];
-            }
-        }
-    }
-}
-int es_simetrica (const int A[N][N])
-{
-    for (int i = 0; i < N; i++)
-    {
-        // Solo comprobamos el "triángulo" inferior de la matriz
-        for (int j = 0; j < i; j++)
-        {
-            if (A[i][j] != A[j][i])
-            {
-                return 1; // Al primer fallo, detenemos y descartamos
-            }
-        }
-    }
-    return 0; // Si terminan los bucles sin errores, es simétrica
+    
 }
