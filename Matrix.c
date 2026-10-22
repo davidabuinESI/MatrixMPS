@@ -1,11 +1,13 @@
 #include <stdio.h>
-#include <OPMATRIX.h>
-#include <IOMATRIX.h>
+#include "OPMATRIX.h"
+#include "IOMATRIX.h"
 
 int main() {
 	while(1) {
 		int opt;
-
+        Matrix A,B,R;
+        Rellena_matriz(A);
+        Rellena_matriz(B);
 		printf("Choose a number from 1 to 5 in order to select operation you want to perform on matrices:\n");
 		printf("[1] Adition\n");	
 		printf("[2] Subtraction\n");	
@@ -18,7 +20,8 @@ int main() {
 
 		switch(opt) {
 			case 1:
-				// Adition
+				R=Addition(A,B);
+                Show_matrix(R);
 				break;
 			case 2:
 				// Subtraction
@@ -64,4 +67,21 @@ Matrix op_sumar(const Matrix A, const Matrix B)
         }
     }
     return R;
+}
+void rellenarMatriz(Matrix M) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            M.m[i][j]=i+j;
+        }
+    }
+}
+void Show_matrix(Matrix M)
+{
+    for (int i;i<5;i++)
+    {
+        for(int j;j<5;i++)
+        {
+            printf("[%d]",M.m[i][j]);
+        }
+    }
 }
