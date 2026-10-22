@@ -72,6 +72,18 @@ Matrix op_sumar(const Matrix A, const Matrix B)
     }
     return R;
 }
+int op_escalar(int k, const int A[][5], int R[][5])
+{
+    for (size_t i = 0; i < 5; i++)
+    {
+        for (size_t j = 0; j < 5; j++)
+        {
+            R[i][j]=A[i][j]*k;
+        }
+        
+    }
+    
+}
 void rellenarMatriz(Matrix M) {
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -81,11 +93,11 @@ void rellenarMatriz(Matrix M) {
 }
 void Show_matrix(Matrix M)
 {
-    for (int i;i<5;i++)
+    for (int i=0;i<5;i++)
     {
-        for(int j;j<5;i++)
+        for(int j=0;j<5;i++)
         {
-            printf("[%d]",M.m[i][j]);
+            printf("[%d]",&M.m[i][j]);
         }
     }
 }
